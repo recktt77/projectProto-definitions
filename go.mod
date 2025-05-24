@@ -1,6 +1,7 @@
 module github.com/recktt77/projectProto-definitions
 
-go 1.23.4
+go 1.23
+
 
 require (
 	google.golang.org/grpc v1.72.1
