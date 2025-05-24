@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+package auth;
+
+option go_package = "auth_service/genproto/auth";
+
+message UserProfile {
+  string name = 1;
+  string bio = 2;
+  repeated string skills = 3;
+  string avatar_url = 4;
+}
+
+message RegisterUserRequest {
+  string email = 1;
+  string password = 2;
+  string role = 3;
+  UserProfile profile = 4;
+}
+
+message RegisterUserResponse {
+  string id = 1;
+  string message = 2;
+}
+
+message LoginUserRequest {
+  string email = 1;
+  string password = 2;
+}
+
+message LoginUserResponse {
+  string token = 1;
+}
+
+message GetProfileRequest {
+  string id = 1;
+}
+
+message GetProfileResponse {
+  string id = 1;
+  string email = 2;
+  string role = 3;
+  UserProfile profile = 4;
+  string created_at = 5;
+  string updated_at = 6;
+}
+
+message UpdateProfileRequest {
+  string id = 1;
+  UserProfile profile = 2;
+}
+
+message UpdateProfileResponse {
+  string message = 1;
+}
+
+service AuthService {
+  rpc RegisterUser(RegisterUserRequest) returns (RegisterUserResponse);
+  rpc LoginUser(LoginUserRequest) returns (LoginUserResponse);
+  rpc GetProfile(GetProfileRequest) returns (GetProfileResponse);
+  rpc UpdateProfile(UpdateProfileRequest) returns (UpdateProfileResponse);
+}
