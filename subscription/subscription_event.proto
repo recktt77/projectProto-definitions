@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package subscription;
+
+option go_package = "auth_service/genproto/subscription";
+
+enum SubscriptionEventType {
+  UNKNOWN = 0;
+  SUBSCRIBED = 1;
+  CANCELLED = 2;
+}
+
+message SubscriptionEvent {
+  string subscription_id = 1;
+  string user_id = 2;
+  string plan_id = 3;
+  string start_date = 4; 
+  string end_date = 5; 
+  bool active = 6;
+  SubscriptionEventType event_type = 7;
+}
