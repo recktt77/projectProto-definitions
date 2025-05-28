@@ -1,0 +1,68 @@
+syntax = "proto3";
+
+package messaging;
+
+option go_package = "messaging_service/genproto/messaging";
+
+// Сообщение в чате
+message Message {
+  string id = 1;
+  string conversation_id = 2;
+  string sender_id = 3;
+  string content = 4;
+  string sent_at = 5;
+}
+
+// Беседа
+message Conversation {
+  string id = 1;
+  repeated string user_ids = 2;
+  string created_at = 3;
+}
+
+// Уведомление
+message Notification {
+  string id = 1;
+  string user_id = 2;
+  string type = 3;   // например: "new_message", "mention"
+  string message = 4;
+  bool read = 5;
+  string created_at = 6;
+}
+
+// Запрос на отправку сообщения
+message SendMessageRequest {
+  string conversation_id = 1;
+  string sender_id = 2;
+  string content = 3;
+}
+
+message SendMessageResponse {
+  string message_id = 1;
+  string message = 2;
+}
+
+// Получение всех сообщений из беседы
+message GetMessagesRequest {
+  string conversation_id = 1;
+}
+
+message GetMessagesResponse {
+  repeated Message messages = 1;
+}
+
+// Подписка на уведомления (можно реализовать через stream)
+message SubscribeToNotificationsRequest {
+  string user_id = 1;
+}
+
+message NotificationStream {
+  Notification notification = 1;
+}
+
+// gRPC сервис
+service MessagingService {
+  rpc SendMessage(SendMessageRequest) returns (SendMessageResponse);
+  rpc GetMessages(GetMessagesRequest) returns (GetMessagesResponse);
+  rpc SubscribeToNotifications(SubscribeToNotificationsRequest) returns (stream NotificationStream);
+}
