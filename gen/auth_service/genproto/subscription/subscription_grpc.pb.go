@@ -31,7 +31,7 @@ const (
 type SubscriptionServiceClient interface {
 	Subscribe(ctx context.Context, in *SubscribeRequest, opts ...grpc.CallOption) (*SubscribeResponse, error)
 	CancelSubscription(ctx context.Context, in *CancelSubscriptionRequest, opts ...grpc.CallOption) (*CancelSubscriptionResponse, error)
-	GetPlans(ctx context.Context, in *SubscribeRequest, opts ...grpc.CallOption) (*SubscribeResponse, error)
+	GetPlans(ctx context.Context, in *SubscribeRequest, opts ...grpc.CallOption) (*GetSubscriptionResponse, error)
 	GetSubscriptionStatus(ctx context.Context, in *GetSubscriptionStatusRequest, opts ...grpc.CallOption) (*GetSubscriptionStatusResponse, error)
 }
 
@@ -63,9 +63,9 @@ func (c *subscriptionServiceClient) CancelSubscription(ctx context.Context, in *
 	return out, nil
 }
 
-func (c *subscriptionServiceClient) GetPlans(ctx context.Context, in *SubscribeRequest, opts ...grpc.CallOption) (*SubscribeResponse, error) {
+func (c *subscriptionServiceClient) GetPlans(ctx context.Context, in *SubscribeRequest, opts ...grpc.CallOption) (*GetSubscriptionResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SubscribeResponse)
+	out := new(GetSubscriptionResponse)
 	err := c.cc.Invoke(ctx, SubscriptionService_GetPlans_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -89,7 +89,7 @@ func (c *subscriptionServiceClient) GetSubscriptionStatus(ctx context.Context, i
 type SubscriptionServiceServer interface {
 	Subscribe(context.Context, *SubscribeRequest) (*SubscribeResponse, error)
 	CancelSubscription(context.Context, *CancelSubscriptionRequest) (*CancelSubscriptionResponse, error)
-	GetPlans(context.Context, *SubscribeRequest) (*SubscribeResponse, error)
+	GetPlans(context.Context, *SubscribeRequest) (*GetSubscriptionResponse, error)
 	GetSubscriptionStatus(context.Context, *GetSubscriptionStatusRequest) (*GetSubscriptionStatusResponse, error)
 	mustEmbedUnimplementedSubscriptionServiceServer()
 }
@@ -107,7 +107,7 @@ func (UnimplementedSubscriptionServiceServer) Subscribe(context.Context, *Subscr
 func (UnimplementedSubscriptionServiceServer) CancelSubscription(context.Context, *CancelSubscriptionRequest) (*CancelSubscriptionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CancelSubscription not implemented")
 }
-func (UnimplementedSubscriptionServiceServer) GetPlans(context.Context, *SubscribeRequest) (*SubscribeResponse, error) {
+func (UnimplementedSubscriptionServiceServer) GetPlans(context.Context, *SubscribeRequest) (*GetSubscriptionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPlans not implemented")
 }
 func (UnimplementedSubscriptionServiceServer) GetSubscriptionStatus(context.Context, *GetSubscriptionStatusRequest) (*GetSubscriptionStatusResponse, error) {

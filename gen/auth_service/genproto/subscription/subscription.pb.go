@@ -622,11 +622,11 @@ const file_subscription_proto_rawDesc = "" +
 	"\x1cGetSubscriptionStatusRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\"_\n" +
 	"\x1dGetSubscriptionStatusResponse\x12>\n" +
-	"\fsubscription\x18\x01 \x01(\v2\x1a.subscription.SubscriptionR\fsubscription2\x8b\x03\n" +
+	"\fsubscription\x18\x01 \x01(\v2\x1a.subscription.SubscriptionR\fsubscription2\x91\x03\n" +
 	"\x13SubscriptionService\x12L\n" +
 	"\tSubscribe\x12\x1e.subscription.SubscribeRequest\x1a\x1f.subscription.SubscribeResponse\x12g\n" +
-	"\x12CancelSubscription\x12'.subscription.CancelSubscriptionRequest\x1a(.subscription.CancelSubscriptionResponse\x12K\n" +
-	"\bGetPlans\x12\x1e.subscription.SubscribeRequest\x1a\x1f.subscription.SubscribeResponse\x12p\n" +
+	"\x12CancelSubscription\x12'.subscription.CancelSubscriptionRequest\x1a(.subscription.CancelSubscriptionResponse\x12Q\n" +
+	"\bGetPlans\x12\x1e.subscription.SubscribeRequest\x1a%.subscription.GetSubscriptionResponse\x12p\n" +
 	"\x15GetSubscriptionStatus\x12*.subscription.GetSubscriptionStatusRequest\x1a+.subscription.GetSubscriptionStatusResponseB$Z\"auth_service/genproto/subscriptionb\x06proto3"
 
 var (
@@ -665,7 +665,7 @@ var file_subscription_proto_depIdxs = []int32{
 	9,  // 6: subscription.SubscriptionService.GetSubscriptionStatus:input_type -> subscription.GetSubscriptionStatusRequest
 	3,  // 7: subscription.SubscriptionService.Subscribe:output_type -> subscription.SubscribeResponse
 	5,  // 8: subscription.SubscriptionService.CancelSubscription:output_type -> subscription.CancelSubscriptionResponse
-	3,  // 9: subscription.SubscriptionService.GetPlans:output_type -> subscription.SubscribeResponse
+	8,  // 9: subscription.SubscriptionService.GetPlans:output_type -> subscription.GetSubscriptionResponse
 	10, // 10: subscription.SubscriptionService.GetSubscriptionStatus:output_type -> subscription.GetSubscriptionStatusResponse
 	7,  // [7:11] is the sub-list for method output_type
 	3,  // [3:7] is the sub-list for method input_type
