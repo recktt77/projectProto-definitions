@@ -56,6 +56,6 @@ message GetSubscriptionStatusResponse {
 service SubscriptionService {
   rpc Subscribe(SubscribeRequest) returns (SubscribeResponse);
   rpc CancelSubscription(CancelSubscriptionRequest) returns (CancelSubscriptionResponse);
-  rpc GetPlans(GetPlansRequest) returns (GetPlansResponse);
+  rpc GetPlans(SubscribeRequest) returns (SubscribeResponse);
   rpc GetSubscriptionStatus(GetSubscriptionStatusRequest) returns (GetSubscriptionStatusResponse);
 }

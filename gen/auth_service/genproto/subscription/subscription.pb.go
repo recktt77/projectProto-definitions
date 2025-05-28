@@ -576,11 +576,11 @@ const file_subscription_proto_rawDesc = "" +
 	"\x1cGetSubscriptionStatusRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\"_\n" +
 	"\x1dGetSubscriptionStatusResponse\x12>\n" +
-	"\fsubscription\x18\x01 \x01(\v2\x1a.subscription.SubscriptionR\fsubscription2\x89\x03\n" +
+	"\fsubscription\x18\x01 \x01(\v2\x1a.subscription.SubscriptionR\fsubscription2\x8b\x03\n" +
 	"\x13SubscriptionService\x12L\n" +
 	"\tSubscribe\x12\x1e.subscription.SubscribeRequest\x1a\x1f.subscription.SubscribeResponse\x12g\n" +
-	"\x12CancelSubscription\x12'.subscription.CancelSubscriptionRequest\x1a(.subscription.CancelSubscriptionResponse\x12I\n" +
-	"\bGetPlans\x12\x1d.subscription.GetPlansRequest\x1a\x1e.subscription.GetPlansResponse\x12p\n" +
+	"\x12CancelSubscription\x12'.subscription.CancelSubscriptionRequest\x1a(.subscription.CancelSubscriptionResponse\x12K\n" +
+	"\bGetPlans\x12\x1e.subscription.SubscribeRequest\x1a\x1f.subscription.SubscribeResponse\x12p\n" +
 	"\x15GetSubscriptionStatus\x12*.subscription.GetSubscriptionStatusRequest\x1a+.subscription.GetSubscriptionStatusResponseB$Z\"auth_service/genproto/subscriptionb\x06proto3"
 
 var (
@@ -613,11 +613,11 @@ var file_subscription_proto_depIdxs = []int32{
 	1, // 1: subscription.GetSubscriptionStatusResponse.subscription:type_name -> subscription.Subscription
 	2, // 2: subscription.SubscriptionService.Subscribe:input_type -> subscription.SubscribeRequest
 	4, // 3: subscription.SubscriptionService.CancelSubscription:input_type -> subscription.CancelSubscriptionRequest
-	6, // 4: subscription.SubscriptionService.GetPlans:input_type -> subscription.GetPlansRequest
+	2, // 4: subscription.SubscriptionService.GetPlans:input_type -> subscription.SubscribeRequest
 	8, // 5: subscription.SubscriptionService.GetSubscriptionStatus:input_type -> subscription.GetSubscriptionStatusRequest
 	3, // 6: subscription.SubscriptionService.Subscribe:output_type -> subscription.SubscribeResponse
 	5, // 7: subscription.SubscriptionService.CancelSubscription:output_type -> subscription.CancelSubscriptionResponse
-	7, // 8: subscription.SubscriptionService.GetPlans:output_type -> subscription.GetPlansResponse
+	3, // 8: subscription.SubscriptionService.GetPlans:output_type -> subscription.SubscribeResponse
 	9, // 9: subscription.SubscriptionService.GetSubscriptionStatus:output_type -> subscription.GetSubscriptionStatusResponse
 	6, // [6:10] is the sub-list for method output_type
 	2, // [2:6] is the sub-list for method input_type
