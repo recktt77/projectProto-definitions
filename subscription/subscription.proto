@@ -1,0 +1,61 @@
+syntax = "proto3";
+
+package subscription;
+
+option go_package = "auth_service/genproto/subscription";
+
+message Plan {
+  string id = 1;
+  string name = 2;
+  repeated string features = 3;
+  double price = 4;
+  int32 duration_days = 5;
+}
+
+message Subscription {
+  string id = 1;
+  string user_id = 2;
+  string plan_id = 3;
+  string start_date = 4;
+  string end_date = 5;
+  bool active = 6;
+}
+
+message SubscribeRequest {
+  string user_id = 1;
+  string plan_id = 2;
+}
+
+message SubscribeResponse {
+  string subscription_id = 1;
+  string message = 2;
+}
+
+message CancelSubscriptionRequest {
+  string subscription_id = 1;
+}
+
+message CancelSubscriptionResponse {
+  string message = 1;
+}
+
+message GetPlansRequest {}
+
+message GetPlansResponse {
+  repeated Plan plans = 1;
+}
+
+message GetSubscriptionStatusRequest {
+  string user_id = 1;
+}
+
+message GetSubscriptionStatusResponse {
+  Subscription subscription = 1;
+}
+
+service SubscriptionService {
+  rpc Subscribe(SubscribeRequest) returns (SubscribeResponse);
+  rpc CancelSubscription(CancelSubscriptionRequest) returns (CancelSubscriptionResponse);
+  rpc GetPlans(GetPlansRequest) returns (GetPlansResponse);
+  rpc GetSubscriptionStatus(GetSubscriptionStatusRequest) returns (GetSubscriptionStatusResponse);
+}
