@@ -45,6 +45,10 @@ message GetPlansResponse {
   repeated Plan plans = 1;
 }
 
+message GetSubscriptionResponse {
+  repeated Subscription subscriptions = 1;
+}
+
 message GetSubscriptionStatusRequest {
   string user_id = 1;
 }
