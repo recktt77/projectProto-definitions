@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+package review;
+
+option go_package = "review_service/genproto/review";
+
+// Модель отзыва
+message Review {
+  string id = 1;
+  string project_id = 2;
+  string reviewer_id = 3;
+  string reviewee_id = 4;
+  int32 rating = 5; // 1–5
+  string comment = 6;
+}
+
+// Запрос на отправку отзыва
+message LeaveReviewRequest {
+  string project_id = 1;
+  string reviewer_id = 2;
+  string reviewee_id = 3;
+  int32 rating = 4;
+  string comment = 5;
+}
+
+message LeaveReviewResponse {
+  string message = 1;
+}
+
+// Получение отзывов по project_id или reviewee_id
+message GetReviewsRequest {
+  string project_id = 1;
+  string reviewee_id = 2;
+}
+
+message GetReviewsResponse {
+  repeated Review reviews = 1;
+}
+
+// Запрос на модерацию (например, удалить или скрыть отзыв)
+message ModerateReviewRequest {
+  string review_id = 1;
+  string action = 2; // "delete", "hide", "approve"
+}
+
+message ModerateReviewResponse {
+  string message = 1;
+}
+
+// gRPC сервис
+service ReviewService {
+  rpc LeaveReview(LeaveReviewRequest) returns (LeaveReviewResponse);
+  rpc GetReviews(GetReviewsRequest) returns (GetReviewsResponse);
+  rpc ModerateReview(ModerateReviewRequest) returns (ModerateReviewResponse);
+}
