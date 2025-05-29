@@ -31,6 +31,7 @@ message GetBidsResponse {
 
 message MatchRequest {
   string project_id = 1;
+  repeated string required_skills = 2;
 }
 
 message MatchResponse {
