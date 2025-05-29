@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.36.6
 // 	protoc        v6.31.1
-// source: matching/matching.proto
+// source: matching.proto
 
 package matching_servicepb
 
@@ -32,7 +32,7 @@ type CreateBidRequest struct {
 
 func (x *CreateBidRequest) Reset() {
 	*x = CreateBidRequest{}
-	mi := &file_matching_matching_proto_msgTypes[0]
+	mi := &file_matching_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -44,7 +44,7 @@ func (x *CreateBidRequest) String() string {
 func (*CreateBidRequest) ProtoMessage() {}
 
 func (x *CreateBidRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_matching_matching_proto_msgTypes[0]
+	mi := &file_matching_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -57,7 +57,7 @@ func (x *CreateBidRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateBidRequest.ProtoReflect.Descriptor instead.
 func (*CreateBidRequest) Descriptor() ([]byte, []int) {
-	return file_matching_matching_proto_rawDescGZIP(), []int{0}
+	return file_matching_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *CreateBidRequest) GetProjectId() string {
@@ -90,7 +90,7 @@ type CreateBidResponse struct {
 
 func (x *CreateBidResponse) Reset() {
 	*x = CreateBidResponse{}
-	mi := &file_matching_matching_proto_msgTypes[1]
+	mi := &file_matching_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -102,7 +102,7 @@ func (x *CreateBidResponse) String() string {
 func (*CreateBidResponse) ProtoMessage() {}
 
 func (x *CreateBidResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_matching_matching_proto_msgTypes[1]
+	mi := &file_matching_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -115,7 +115,7 @@ func (x *CreateBidResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateBidResponse.ProtoReflect.Descriptor instead.
 func (*CreateBidResponse) Descriptor() ([]byte, []int) {
-	return file_matching_matching_proto_rawDescGZIP(), []int{1}
+	return file_matching_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *CreateBidResponse) GetBidId() string {
@@ -134,7 +134,7 @@ type GetBidsRequest struct {
 
 func (x *GetBidsRequest) Reset() {
 	*x = GetBidsRequest{}
-	mi := &file_matching_matching_proto_msgTypes[2]
+	mi := &file_matching_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -146,7 +146,7 @@ func (x *GetBidsRequest) String() string {
 func (*GetBidsRequest) ProtoMessage() {}
 
 func (x *GetBidsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_matching_matching_proto_msgTypes[2]
+	mi := &file_matching_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -159,7 +159,7 @@ func (x *GetBidsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetBidsRequest.ProtoReflect.Descriptor instead.
 func (*GetBidsRequest) Descriptor() ([]byte, []int) {
-	return file_matching_matching_proto_rawDescGZIP(), []int{2}
+	return file_matching_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *GetBidsRequest) GetProjectId() string {
@@ -178,7 +178,7 @@ type GetBidsResponse struct {
 
 func (x *GetBidsResponse) Reset() {
 	*x = GetBidsResponse{}
-	mi := &file_matching_matching_proto_msgTypes[3]
+	mi := &file_matching_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -190,7 +190,7 @@ func (x *GetBidsResponse) String() string {
 func (*GetBidsResponse) ProtoMessage() {}
 
 func (x *GetBidsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_matching_matching_proto_msgTypes[3]
+	mi := &file_matching_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -203,7 +203,7 @@ func (x *GetBidsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetBidsResponse.ProtoReflect.Descriptor instead.
 func (*GetBidsResponse) Descriptor() ([]byte, []int) {
-	return file_matching_matching_proto_rawDescGZIP(), []int{3}
+	return file_matching_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *GetBidsResponse) GetBids() []*Bid {
@@ -223,7 +223,7 @@ type MatchRequest struct {
 
 func (x *MatchRequest) Reset() {
 	*x = MatchRequest{}
-	mi := &file_matching_matching_proto_msgTypes[4]
+	mi := &file_matching_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -235,7 +235,7 @@ func (x *MatchRequest) String() string {
 func (*MatchRequest) ProtoMessage() {}
 
 func (x *MatchRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_matching_matching_proto_msgTypes[4]
+	mi := &file_matching_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -248,7 +248,7 @@ func (x *MatchRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MatchRequest.ProtoReflect.Descriptor instead.
 func (*MatchRequest) Descriptor() ([]byte, []int) {
-	return file_matching_matching_proto_rawDescGZIP(), []int{4}
+	return file_matching_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *MatchRequest) GetProjectId() string {
@@ -274,7 +274,7 @@ type MatchResponse struct {
 
 func (x *MatchResponse) Reset() {
 	*x = MatchResponse{}
-	mi := &file_matching_matching_proto_msgTypes[5]
+	mi := &file_matching_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -286,7 +286,7 @@ func (x *MatchResponse) String() string {
 func (*MatchResponse) ProtoMessage() {}
 
 func (x *MatchResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_matching_matching_proto_msgTypes[5]
+	mi := &file_matching_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -299,7 +299,7 @@ func (x *MatchResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MatchResponse.ProtoReflect.Descriptor instead.
 func (*MatchResponse) Descriptor() ([]byte, []int) {
-	return file_matching_matching_proto_rawDescGZIP(), []int{5}
+	return file_matching_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *MatchResponse) GetFreelancers() []*Freelancer {
@@ -321,7 +321,7 @@ type Bid struct {
 
 func (x *Bid) Reset() {
 	*x = Bid{}
-	mi := &file_matching_matching_proto_msgTypes[6]
+	mi := &file_matching_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -333,7 +333,7 @@ func (x *Bid) String() string {
 func (*Bid) ProtoMessage() {}
 
 func (x *Bid) ProtoReflect() protoreflect.Message {
-	mi := &file_matching_matching_proto_msgTypes[6]
+	mi := &file_matching_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -346,7 +346,7 @@ func (x *Bid) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Bid.ProtoReflect.Descriptor instead.
 func (*Bid) Descriptor() ([]byte, []int) {
-	return file_matching_matching_proto_rawDescGZIP(), []int{6}
+	return file_matching_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *Bid) GetBidId() string {
@@ -388,7 +388,7 @@ type Freelancer struct {
 
 func (x *Freelancer) Reset() {
 	*x = Freelancer{}
-	mi := &file_matching_matching_proto_msgTypes[7]
+	mi := &file_matching_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -400,7 +400,7 @@ func (x *Freelancer) String() string {
 func (*Freelancer) ProtoMessage() {}
 
 func (x *Freelancer) ProtoReflect() protoreflect.Message {
-	mi := &file_matching_matching_proto_msgTypes[7]
+	mi := &file_matching_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -413,7 +413,7 @@ func (x *Freelancer) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Freelancer.ProtoReflect.Descriptor instead.
 func (*Freelancer) Descriptor() ([]byte, []int) {
-	return file_matching_matching_proto_rawDescGZIP(), []int{7}
+	return file_matching_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *Freelancer) GetFreelancerId() string {
@@ -437,11 +437,11 @@ func (x *Freelancer) GetSkills() []string {
 	return nil
 }
 
-var File_matching_matching_proto protoreflect.FileDescriptor
+var File_matching_proto protoreflect.FileDescriptor
 
-const file_matching_matching_proto_rawDesc = "" +
+const file_matching_proto_rawDesc = "" +
 	"\n" +
-	"\x17matching/matching.proto\x12\bmatching\"y\n" +
+	"\x0ematching.proto\x12\bmatching\"y\n" +
 	"\x10CreateBidRequest\x12\x1d\n" +
 	"\n" +
 	"project_id\x18\x01 \x01(\tR\tprojectId\x12#\n" +
@@ -476,19 +476,19 @@ const file_matching_matching_proto_rawDesc = "" +
 	"\x10MatchFreelancers\x12\x16.matching.MatchRequest\x1a\x17.matching.MatchResponseBRZPgithub.com/recktt77/projectProto-definitions/matching_service;matching_servicepbb\x06proto3"
 
 var (
-	file_matching_matching_proto_rawDescOnce sync.Once
-	file_matching_matching_proto_rawDescData []byte
+	file_matching_proto_rawDescOnce sync.Once
+	file_matching_proto_rawDescData []byte
 )
 
-func file_matching_matching_proto_rawDescGZIP() []byte {
-	file_matching_matching_proto_rawDescOnce.Do(func() {
-		file_matching_matching_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_matching_matching_proto_rawDesc), len(file_matching_matching_proto_rawDesc)))
+func file_matching_proto_rawDescGZIP() []byte {
+	file_matching_proto_rawDescOnce.Do(func() {
+		file_matching_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_matching_proto_rawDesc), len(file_matching_proto_rawDesc)))
 	})
-	return file_matching_matching_proto_rawDescData
+	return file_matching_proto_rawDescData
 }
 
-var file_matching_matching_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
-var file_matching_matching_proto_goTypes = []any{
+var file_matching_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
+var file_matching_proto_goTypes = []any{
 	(*CreateBidRequest)(nil),  // 0: matching.CreateBidRequest
 	(*CreateBidResponse)(nil), // 1: matching.CreateBidResponse
 	(*GetBidsRequest)(nil),    // 2: matching.GetBidsRequest
@@ -498,7 +498,7 @@ var file_matching_matching_proto_goTypes = []any{
 	(*Bid)(nil),               // 6: matching.Bid
 	(*Freelancer)(nil),        // 7: matching.Freelancer
 }
-var file_matching_matching_proto_depIdxs = []int32{
+var file_matching_proto_depIdxs = []int32{
 	6, // 0: matching.GetBidsResponse.bids:type_name -> matching.Bid
 	7, // 1: matching.MatchResponse.freelancers:type_name -> matching.Freelancer
 	0, // 2: matching.MatchingService.CreateBid:input_type -> matching.CreateBidRequest
@@ -514,26 +514,26 @@ var file_matching_matching_proto_depIdxs = []int32{
 	0, // [0:2] is the sub-list for field type_name
 }
 
-func init() { file_matching_matching_proto_init() }
-func file_matching_matching_proto_init() {
-	if File_matching_matching_proto != nil {
+func init() { file_matching_proto_init() }
+func file_matching_proto_init() {
+	if File_matching_proto != nil {
 		return
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_matching_matching_proto_rawDesc), len(file_matching_matching_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_matching_proto_rawDesc), len(file_matching_proto_rawDesc)),
 			NumEnums:      0,
 			NumMessages:   8,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_matching_matching_proto_goTypes,
-		DependencyIndexes: file_matching_matching_proto_depIdxs,
-		MessageInfos:      file_matching_matching_proto_msgTypes,
+		GoTypes:           file_matching_proto_goTypes,
+		DependencyIndexes: file_matching_proto_depIdxs,
+		MessageInfos:      file_matching_proto_msgTypes,
 	}.Build()
-	File_matching_matching_proto = out.File
-	file_matching_matching_proto_goTypes = nil
-	file_matching_matching_proto_depIdxs = nil
+	File_matching_proto = out.File
+	file_matching_proto_goTypes = nil
+	file_matching_proto_depIdxs = nil
 }
