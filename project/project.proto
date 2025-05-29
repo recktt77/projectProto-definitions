@@ -29,6 +29,8 @@ message GetAllProjectsResponse {
   repeated ProjectData projects = 1;
 }
 
+
+
 message GetProjectRequest {
   string id = 1;
 }
@@ -36,6 +38,8 @@ message GetProjectRequest {
 message GetProjectResponse {
   ProjectData project = 1;
 }
+
+
 
 message CreateProjectRequest {
   string client_id = 1;
@@ -51,6 +55,8 @@ message CreateProjectResponse {
   string message = 2;
 }
 
+
+
 message UpdateProjectRequest {
   string client_id = 1;
   string title = 2;
@@ -64,26 +70,55 @@ message UpdateProjectResponse {
   string message = 1;
 }
 
+
+
 message CreateTaskRequest {
-  string title = 1;
-  string description = 2;
-  string status = 3;
+  string project_id = 1;
+  string title = 2;
+  string description = 3;
+  string status = 4;
 }
 
 message CreateTaskResponse {
-  string id = 1;
-  string message = 2;
+  string message = 1;
 }
 
+
+
 message UpdateTaskRequest {
-  string title = 1;
-  string description = 2;
-  string status = 3;
+  string project_id = 1;
+  string task_title = 2;
+  string new_title = 3;
+  string new_description = 4;
+  string new_status = 5;
 }
 
 message UpdateTaskResponse {
   string message = 1;
 }
+
+
+
+message DeleteTaskRequest {
+  string project_id = 1;
+  string task_title = 2;
+}
+
+message DeleteTaskResponse {
+  string message = 1;
+}
+
+
+
+message GetTasksRequest {
+  string project_id = 1;
+}
+
+message GetTasksResponse {
+  repeated Task tasks = 1;
+}
+
+
 
 message AttachFileRequest {
   string project_id = 1;
@@ -94,6 +129,19 @@ message AttachFileResponse {
   string message = 1;
 }
 
+
+
+message DeleteFileRequest {
+  string project_id = 1;
+  string file_url = 2;
+}
+
+message DeleteFileResponse {
+  string message = 1;
+}
+
+
+
 message DeleteProjectRequest {
   string id = 1;
 }
@@ -102,13 +150,18 @@ message DeleteProjectResponse {
   string message = 1;
 }
 
+
+
 service ProjectService {
   rpc GetAllProjects(GetAllProjectsRequest) returns (GetAllProjectsResponse);
   rpc GetProject(GetProjectRequest) returns (GetProjectResponse);
   rpc CreateProject(CreateProjectRequest) returns (CreateProjectResponse);
   rpc UpdateProject(UpdateProjectRequest) returns (UpdateProjectResponse);
+  rpc DeleteProject(DeleteProjectRequest) returns (DeleteProjectResponse);
   rpc CreateTask(CreateTaskRequest) returns (CreateTaskResponse);
   rpc UpdateTask(UpdateTaskRequest) returns (UpdateTaskResponse);
+  rpc DeleteTask(DeleteTaskRequest) returns (DeleteTaskResponse);
+  rpc GetTasks(GetTasksRequest) returns (GetTasksResponse);
   rpc AttachFile(AttachFileRequest) returns (AttachFileResponse);
-  rpc DeleteProject(DeleteProjectRequest) returns (DeleteProjectResponse);
+  rpc DeleteFile(DeleteFileRequest) returns (DeleteFileResponse);
 }
