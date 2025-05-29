@@ -2,7 +2,8 @@ syntax = "proto3";
 
 package matching;
 
-option go_package = "github.com/recktt77/projectProto-definitions/matching;matchingpb";
+option go_package = "github.com/recktt77/projectProto-definitions/matching_service;matching_servicepb";
+
 
 service MatchingService {
   rpc CreateBid (CreateBidRequest) returns (CreateBidResponse);
