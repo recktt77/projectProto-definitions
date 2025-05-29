@@ -117,102 +117,6 @@ func (x *BanUserResponse) GetSuccess() bool {
 	return false
 }
 
-type ModerateProjectRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ProjectId     string                 `protobuf:"bytes,1,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
-	Action        string                 `protobuf:"bytes,2,opt,name=action,proto3" json:"action,omitempty"` // "approve", "reject"
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ModerateProjectRequest) Reset() {
-	*x = ModerateProjectRequest{}
-	mi := &file_admin_proto_msgTypes[2]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ModerateProjectRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ModerateProjectRequest) ProtoMessage() {}
-
-func (x *ModerateProjectRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_admin_proto_msgTypes[2]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ModerateProjectRequest.ProtoReflect.Descriptor instead.
-func (*ModerateProjectRequest) Descriptor() ([]byte, []int) {
-	return file_admin_proto_rawDescGZIP(), []int{2}
-}
-
-func (x *ModerateProjectRequest) GetProjectId() string {
-	if x != nil {
-		return x.ProjectId
-	}
-	return ""
-}
-
-func (x *ModerateProjectRequest) GetAction() string {
-	if x != nil {
-		return x.Action
-	}
-	return ""
-}
-
-type ModerateProjectResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ModerateProjectResponse) Reset() {
-	*x = ModerateProjectResponse{}
-	mi := &file_admin_proto_msgTypes[3]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ModerateProjectResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ModerateProjectResponse) ProtoMessage() {}
-
-func (x *ModerateProjectResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_admin_proto_msgTypes[3]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ModerateProjectResponse.ProtoReflect.Descriptor instead.
-func (*ModerateProjectResponse) Descriptor() ([]byte, []int) {
-	return file_admin_proto_rawDescGZIP(), []int{3}
-}
-
-func (x *ModerateProjectResponse) GetSuccess() bool {
-	if x != nil {
-		return x.Success
-	}
-	return false
-}
-
 type DeleteReviewRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	ReviewId      string                 `protobuf:"bytes,1,opt,name=review_id,json=reviewId,proto3" json:"review_id,omitempty"`
@@ -223,7 +127,7 @@ type DeleteReviewRequest struct {
 
 func (x *DeleteReviewRequest) Reset() {
 	*x = DeleteReviewRequest{}
-	mi := &file_admin_proto_msgTypes[4]
+	mi := &file_admin_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -235,7 +139,7 @@ func (x *DeleteReviewRequest) String() string {
 func (*DeleteReviewRequest) ProtoMessage() {}
 
 func (x *DeleteReviewRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_admin_proto_msgTypes[4]
+	mi := &file_admin_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -248,7 +152,7 @@ func (x *DeleteReviewRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteReviewRequest.ProtoReflect.Descriptor instead.
 func (*DeleteReviewRequest) Descriptor() ([]byte, []int) {
-	return file_admin_proto_rawDescGZIP(), []int{4}
+	return file_admin_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *DeleteReviewRequest) GetReviewId() string {
@@ -274,7 +178,7 @@ type DeleteReviewResponse struct {
 
 func (x *DeleteReviewResponse) Reset() {
 	*x = DeleteReviewResponse{}
-	mi := &file_admin_proto_msgTypes[5]
+	mi := &file_admin_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -286,7 +190,7 @@ func (x *DeleteReviewResponse) String() string {
 func (*DeleteReviewResponse) ProtoMessage() {}
 
 func (x *DeleteReviewResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_admin_proto_msgTypes[5]
+	mi := &file_admin_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -299,10 +203,106 @@ func (x *DeleteReviewResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteReviewResponse.ProtoReflect.Descriptor instead.
 func (*DeleteReviewResponse) Descriptor() ([]byte, []int) {
-	return file_admin_proto_rawDescGZIP(), []int{5}
+	return file_admin_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *DeleteReviewResponse) GetSuccess() bool {
+	if x != nil {
+		return x.Success
+	}
+	return false
+}
+
+type ModerateProjectRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ProjectId     string                 `protobuf:"bytes,1,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
+	Action        string                 `protobuf:"bytes,2,opt,name=action,proto3" json:"action,omitempty"` // "approve" или "reject"
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ModerateProjectRequest) Reset() {
+	*x = ModerateProjectRequest{}
+	mi := &file_admin_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ModerateProjectRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ModerateProjectRequest) ProtoMessage() {}
+
+func (x *ModerateProjectRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_admin_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ModerateProjectRequest.ProtoReflect.Descriptor instead.
+func (*ModerateProjectRequest) Descriptor() ([]byte, []int) {
+	return file_admin_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *ModerateProjectRequest) GetProjectId() string {
+	if x != nil {
+		return x.ProjectId
+	}
+	return ""
+}
+
+func (x *ModerateProjectRequest) GetAction() string {
+	if x != nil {
+		return x.Action
+	}
+	return ""
+}
+
+type ModerateProjectResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ModerateProjectResponse) Reset() {
+	*x = ModerateProjectResponse{}
+	mi := &file_admin_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ModerateProjectResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ModerateProjectResponse) ProtoMessage() {}
+
+func (x *ModerateProjectResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_admin_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ModerateProjectResponse.ProtoReflect.Descriptor instead.
+func (*ModerateProjectResponse) Descriptor() ([]byte, []int) {
+	return file_admin_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *ModerateProjectResponse) GetSuccess() bool {
 	if x != nil {
 		return x.Success
 	}
@@ -422,17 +422,17 @@ const file_admin_proto_rawDesc = "" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x16\n" +
 	"\x06reason\x18\x02 \x01(\tR\x06reason\"+\n" +
 	"\x0fBanUserResponse\x12\x18\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\"U\n" +
+	"\x13DeleteReviewRequest\x12\x1b\n" +
+	"\treview_id\x18\x01 \x01(\tR\breviewId\x12!\n" +
+	"\fmoderator_id\x18\x02 \x01(\tR\vmoderatorId\"0\n" +
+	"\x14DeleteReviewResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\"O\n" +
 	"\x16ModerateProjectRequest\x12\x1d\n" +
 	"\n" +
 	"project_id\x18\x01 \x01(\tR\tprojectId\x12\x16\n" +
 	"\x06action\x18\x02 \x01(\tR\x06action\"3\n" +
 	"\x17ModerateProjectResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\"U\n" +
-	"\x13DeleteReviewRequest\x12\x1b\n" +
-	"\treview_id\x18\x01 \x01(\tR\breviewId\x12!\n" +
-	"\fmoderator_id\x18\x02 \x01(\tR\vmoderatorId\"0\n" +
-	"\x14DeleteReviewResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\"\x11\n" +
 	"\x0fGetStatsRequest\"\xa4\x01\n" +
 	"\x10GetStatsResponse\x12\x1f\n" +
@@ -440,12 +440,12 @@ const file_admin_proto_rawDesc = "" +
 	"totalUsers\x12!\n" +
 	"\fbanned_users\x18\x02 \x01(\x05R\vbannedUsers\x12'\n" +
 	"\x0factive_projects\x18\x03 \x01(\x05R\x0eactiveProjects\x12#\n" +
-	"\rtotal_reviews\x18\x04 \x01(\x05R\ftotalReviews2\xe7\x02\n" +
+	"\rtotal_reviews\x18\x04 \x01(\x05R\ftotalReviews2\xe8\x02\n" +
 	"\fAdminService\x12H\n" +
-	"\aBanUser\x12\x1d.admin_service.BanUserRequest\x1a\x1e.admin_service.BanUserResponse\x12_\n" +
-	"\x0eApproveProject\x12%.admin_service.ModerateProjectRequest\x1a&.admin_service.ModerateProjectResponse\x12W\n" +
-	"\fDeleteReview\x12\".admin_service.DeleteReviewRequest\x1a#.admin_service.DeleteReviewResponse\x12S\n" +
-	"\x10GetPlatformStats\x12\x1e.admin_service.GetStatsRequest\x1a\x1f.admin_service.GetStatsResponseB@Z>github.com/recktt77/projectProto-definitions/gen/admin_serviceb\x06proto3"
+	"\aBanUser\x12\x1d.admin_service.BanUserRequest\x1a\x1e.admin_service.BanUserResponse\x12W\n" +
+	"\fDeleteReview\x12\".admin_service.DeleteReviewRequest\x1a#.admin_service.DeleteReviewResponse\x12`\n" +
+	"\x0fModerateProject\x12%.admin_service.ModerateProjectRequest\x1a&.admin_service.ModerateProjectResponse\x12S\n" +
+	"\x10GetPlatformStats\x12\x1e.admin_service.GetStatsRequest\x1a\x1f.admin_service.GetStatsResponseBDZBgithub.com/your_account/projectProto-definitions/gen/admin_serviceb\x06proto3"
 
 var (
 	file_admin_proto_rawDescOnce sync.Once
@@ -463,21 +463,21 @@ var file_admin_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_admin_proto_goTypes = []any{
 	(*BanUserRequest)(nil),          // 0: admin_service.BanUserRequest
 	(*BanUserResponse)(nil),         // 1: admin_service.BanUserResponse
-	(*ModerateProjectRequest)(nil),  // 2: admin_service.ModerateProjectRequest
-	(*ModerateProjectResponse)(nil), // 3: admin_service.ModerateProjectResponse
-	(*DeleteReviewRequest)(nil),     // 4: admin_service.DeleteReviewRequest
-	(*DeleteReviewResponse)(nil),    // 5: admin_service.DeleteReviewResponse
+	(*DeleteReviewRequest)(nil),     // 2: admin_service.DeleteReviewRequest
+	(*DeleteReviewResponse)(nil),    // 3: admin_service.DeleteReviewResponse
+	(*ModerateProjectRequest)(nil),  // 4: admin_service.ModerateProjectRequest
+	(*ModerateProjectResponse)(nil), // 5: admin_service.ModerateProjectResponse
 	(*GetStatsRequest)(nil),         // 6: admin_service.GetStatsRequest
 	(*GetStatsResponse)(nil),        // 7: admin_service.GetStatsResponse
 }
 var file_admin_proto_depIdxs = []int32{
 	0, // 0: admin_service.AdminService.BanUser:input_type -> admin_service.BanUserRequest
-	2, // 1: admin_service.AdminService.ApproveProject:input_type -> admin_service.ModerateProjectRequest
-	4, // 2: admin_service.AdminService.DeleteReview:input_type -> admin_service.DeleteReviewRequest
+	2, // 1: admin_service.AdminService.DeleteReview:input_type -> admin_service.DeleteReviewRequest
+	4, // 2: admin_service.AdminService.ModerateProject:input_type -> admin_service.ModerateProjectRequest
 	6, // 3: admin_service.AdminService.GetPlatformStats:input_type -> admin_service.GetStatsRequest
 	1, // 4: admin_service.AdminService.BanUser:output_type -> admin_service.BanUserResponse
-	3, // 5: admin_service.AdminService.ApproveProject:output_type -> admin_service.ModerateProjectResponse
-	5, // 6: admin_service.AdminService.DeleteReview:output_type -> admin_service.DeleteReviewResponse
+	3, // 5: admin_service.AdminService.DeleteReview:output_type -> admin_service.DeleteReviewResponse
+	5, // 6: admin_service.AdminService.ModerateProject:output_type -> admin_service.ModerateProjectResponse
 	7, // 7: admin_service.AdminService.GetPlatformStats:output_type -> admin_service.GetStatsResponse
 	4, // [4:8] is the sub-list for method output_type
 	0, // [0:4] is the sub-list for method input_type
