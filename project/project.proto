@@ -58,12 +58,13 @@ message CreateProjectResponse {
 
 
 message UpdateProjectRequest {
-  string client_id = 1;
-  string title = 2;
-  string description = 3;
-  string status = 4;
-  repeated Task tasks = 5;
-  repeated string attachments = 6;
+  string project_id = 1;
+  string client_id = 2;
+  string title = 3;
+  string description = 4;
+  string status = 5;
+  repeated Task tasks = 6;
+  repeated string attachments = 7;
 }
 
 message UpdateProjectResponse {

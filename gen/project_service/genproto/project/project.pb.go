@@ -487,12 +487,13 @@ func (x *CreateProjectResponse) GetMessage() string {
 
 type UpdateProjectRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	ClientId      string                 `protobuf:"bytes,1,opt,name=client_id,json=clientId,proto3" json:"client_id,omitempty"`
-	Title         string                 `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`
-	Description   string                 `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
-	Status        string                 `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`
-	Tasks         []*Task                `protobuf:"bytes,5,rep,name=tasks,proto3" json:"tasks,omitempty"`
-	Attachments   []string               `protobuf:"bytes,6,rep,name=attachments,proto3" json:"attachments,omitempty"`
+	ProjectId     string                 `protobuf:"bytes,1,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
+	ClientId      string                 `protobuf:"bytes,2,opt,name=client_id,json=clientId,proto3" json:"client_id,omitempty"`
+	Title         string                 `protobuf:"bytes,3,opt,name=title,proto3" json:"title,omitempty"`
+	Description   string                 `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
+	Status        string                 `protobuf:"bytes,5,opt,name=status,proto3" json:"status,omitempty"`
+	Tasks         []*Task                `protobuf:"bytes,6,rep,name=tasks,proto3" json:"tasks,omitempty"`
+	Attachments   []string               `protobuf:"bytes,7,rep,name=attachments,proto3" json:"attachments,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -525,6 +526,13 @@ func (x *UpdateProjectRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use UpdateProjectRequest.ProtoReflect.Descriptor instead.
 func (*UpdateProjectRequest) Descriptor() ([]byte, []int) {
 	return file_project_project_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *UpdateProjectRequest) GetProjectId() string {
+	if x != nil {
+		return x.ProjectId
+	}
+	return ""
 }
 
 func (x *UpdateProjectRequest) GetClientId() string {
@@ -1343,14 +1351,16 @@ const file_project_project_proto_rawDesc = "" +
 	"\vattachments\x18\x06 \x03(\tR\vattachments\"A\n" +
 	"\x15CreateProjectResponse\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessage\"\xca\x01\n" +
-	"\x14UpdateProjectRequest\x12\x1b\n" +
-	"\tclient_id\x18\x01 \x01(\tR\bclientId\x12\x14\n" +
-	"\x05title\x18\x02 \x01(\tR\x05title\x12 \n" +
-	"\vdescription\x18\x03 \x01(\tR\vdescription\x12\x16\n" +
-	"\x06status\x18\x04 \x01(\tR\x06status\x12#\n" +
-	"\x05tasks\x18\x05 \x03(\v2\r.project.TaskR\x05tasks\x12 \n" +
-	"\vattachments\x18\x06 \x03(\tR\vattachments\"1\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage\"\xe9\x01\n" +
+	"\x14UpdateProjectRequest\x12\x1d\n" +
+	"\n" +
+	"project_id\x18\x01 \x01(\tR\tprojectId\x12\x1b\n" +
+	"\tclient_id\x18\x02 \x01(\tR\bclientId\x12\x14\n" +
+	"\x05title\x18\x03 \x01(\tR\x05title\x12 \n" +
+	"\vdescription\x18\x04 \x01(\tR\vdescription\x12\x16\n" +
+	"\x06status\x18\x05 \x01(\tR\x06status\x12#\n" +
+	"\x05tasks\x18\x06 \x03(\v2\r.project.TaskR\x05tasks\x12 \n" +
+	"\vattachments\x18\a \x03(\tR\vattachments\"1\n" +
 	"\x15UpdateProjectResponse\x12\x18\n" +
 	"\amessage\x18\x01 \x01(\tR\amessage\"\x82\x01\n" +
 	"\x11CreateTaskRequest\x12\x1d\n" +
