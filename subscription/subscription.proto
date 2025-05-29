@@ -2,7 +2,11 @@ syntax = "proto3";
 
 package subscription;
 
+import "google/protobuf/timestamp.proto";
+
 option go_package = "auth_service/genproto/subscription";
+
+// ---------- Plan Messages ----------
 
 message Plan {
   string id = 1;
@@ -12,12 +16,63 @@ message Plan {
   int32 duration_days = 5;
 }
 
+message PlanFilter {
+  string id = 1;
+  string name = 2;
+  repeated string features = 3;
+  double price = 4;
+  int32 duration_days = 5;
+}
+
+message PlanUpdate {
+  string id = 1;
+  string name = 2;
+  repeated string features = 3;
+  double price = 4;
+  int32 duration_days = 5;
+}
+
+message CreatePlanRequest {
+  Plan plan = 1;
+}
+
+message CreatePlanResponse {
+  string message = 1;
+}
+
+message GetPlanByIDRequest {
+  PlanFilter filter = 1;
+}
+
+message GetPlanByIDResponse {
+  Plan plan = 1;
+}
+
+message UpdatePlanRequest {
+  PlanFilter filter = 1;
+  PlanUpdate update = 2;
+}
+
+message UpdatePlanResponse {
+  string message = 1;
+}
+
+message GetListOfPlansRequest {
+  PlanFilter filter = 1;
+}
+
+message GetListOfPlansResponse {
+  repeated Plan plans = 1;
+}
+
+// ---------- Subscription Messages ----------
+
 message Subscription {
   string id = 1;
   string user_id = 2;
   string plan_id = 3;
-  string start_date = 4;
-  string end_date = 5;
+  google.protobuf.Timestamp start_date = 4;
+  google.protobuf.Timestamp end_date = 5;
   bool active = 6;
 }
 
@@ -27,8 +82,7 @@ message SubscribeRequest {
 }
 
 message SubscribeResponse {
-  string subscription_id = 1;
-  string message = 2;
+  Subscription subscription = 1;
 }
 
 message CancelSubscriptionRequest {
@@ -39,10 +93,8 @@ message CancelSubscriptionResponse {
   string message = 1;
 }
 
-message GetPlansRequest {}
-
-message GetPlansResponse {
-  repeated Plan plans = 1;
+message GetSubscriptionRequest {
+  string user_id = 1;
 }
 
 message GetSubscriptionResponse {
@@ -57,9 +109,18 @@ message GetSubscriptionStatusResponse {
   Subscription subscription = 1;
 }
 
+// ---------- Service ----------
+
 service SubscriptionService {
+  // Plan management
+  rpc CreatePlan(CreatePlanRequest) returns (CreatePlanResponse);
+  rpc GetPlanByID(GetPlanByIDRequest) returns (GetPlanByIDResponse);
+  rpc UpdatePlan(UpdatePlanRequest) returns (UpdatePlanResponse);
+  rpc GetListOfPlans(GetListOfPlansRequest) returns (GetListOfPlansResponse);
+
+  // Subscription management
   rpc Subscribe(SubscribeRequest) returns (SubscribeResponse);
   rpc CancelSubscription(CancelSubscriptionRequest) returns (CancelSubscriptionResponse);
-  rpc GetPlans(SubscribeRequest) returns (GetSubscriptionResponse);
+  rpc GetSubscription(GetSubscriptionRequest) returns (GetSubscriptionResponse);
   rpc GetSubscriptionStatus(GetSubscriptionStatusRequest) returns (GetSubscriptionStatusResponse);
 }
