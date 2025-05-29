@@ -9,6 +9,8 @@ package subscription
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	anypb "google.golang.org/protobuf/types/known/anypb"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -21,82 +23,29 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type SubscriptionEventType int32
-
-const (
-	SubscriptionEventType_UNKNOWN    SubscriptionEventType = 0
-	SubscriptionEventType_SUBSCRIBED SubscriptionEventType = 1
-	SubscriptionEventType_CANCELLED  SubscriptionEventType = 2
-)
-
-// Enum value maps for SubscriptionEventType.
-var (
-	SubscriptionEventType_name = map[int32]string{
-		0: "UNKNOWN",
-		1: "SUBSCRIBED",
-		2: "CANCELLED",
-	}
-	SubscriptionEventType_value = map[string]int32{
-		"UNKNOWN":    0,
-		"SUBSCRIBED": 1,
-		"CANCELLED":  2,
-	}
-)
-
-func (x SubscriptionEventType) Enum() *SubscriptionEventType {
-	p := new(SubscriptionEventType)
-	*p = x
-	return p
+type Event struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Type          string                 `protobuf:"bytes,1,opt,name=type,proto3" json:"type,omitempty"` // e.g., "plan.created", "subscription.cancelled"
+	Data          *anypb.Any             `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
+	Time          *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=time,proto3" json:"time,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
-func (x SubscriptionEventType) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (SubscriptionEventType) Descriptor() protoreflect.EnumDescriptor {
-	return file_subscription_event_proto_enumTypes[0].Descriptor()
-}
-
-func (SubscriptionEventType) Type() protoreflect.EnumType {
-	return &file_subscription_event_proto_enumTypes[0]
-}
-
-func (x SubscriptionEventType) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use SubscriptionEventType.Descriptor instead.
-func (SubscriptionEventType) EnumDescriptor() ([]byte, []int) {
-	return file_subscription_event_proto_rawDescGZIP(), []int{0}
-}
-
-type SubscriptionEvent struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	SubscriptionId string                 `protobuf:"bytes,1,opt,name=subscription_id,json=subscriptionId,proto3" json:"subscription_id,omitempty"`
-	UserId         string                 `protobuf:"bytes,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	PlanId         string                 `protobuf:"bytes,3,opt,name=plan_id,json=planId,proto3" json:"plan_id,omitempty"`
-	StartDate      string                 `protobuf:"bytes,4,opt,name=start_date,json=startDate,proto3" json:"start_date,omitempty"`
-	EndDate        string                 `protobuf:"bytes,5,opt,name=end_date,json=endDate,proto3" json:"end_date,omitempty"`
-	Active         bool                   `protobuf:"varint,6,opt,name=active,proto3" json:"active,omitempty"`
-	EventType      SubscriptionEventType  `protobuf:"varint,7,opt,name=event_type,json=eventType,proto3,enum=subscription.SubscriptionEventType" json:"event_type,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
-}
-
-func (x *SubscriptionEvent) Reset() {
-	*x = SubscriptionEvent{}
+func (x *Event) Reset() {
+	*x = Event{}
 	mi := &file_subscription_event_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SubscriptionEvent) String() string {
+func (x *Event) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SubscriptionEvent) ProtoMessage() {}
+func (*Event) ProtoMessage() {}
 
-func (x *SubscriptionEvent) ProtoReflect() protoreflect.Message {
+func (x *Event) ProtoReflect() protoreflect.Message {
 	mi := &file_subscription_event_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -108,80 +57,215 @@ func (x *SubscriptionEvent) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SubscriptionEvent.ProtoReflect.Descriptor instead.
-func (*SubscriptionEvent) Descriptor() ([]byte, []int) {
+// Deprecated: Use Event.ProtoReflect.Descriptor instead.
+func (*Event) Descriptor() ([]byte, []int) {
 	return file_subscription_event_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *SubscriptionEvent) GetSubscriptionId() string {
+func (x *Event) GetType() string {
 	if x != nil {
-		return x.SubscriptionId
+		return x.Type
 	}
 	return ""
 }
 
-func (x *SubscriptionEvent) GetUserId() string {
+func (x *Event) GetData() *anypb.Any {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+func (x *Event) GetTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.Time
+	}
+	return nil
+}
+
+type PlanPayload struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Features      []string               `protobuf:"bytes,3,rep,name=features,proto3" json:"features,omitempty"`
+	Price         float64                `protobuf:"fixed64,4,opt,name=price,proto3" json:"price,omitempty"`
+	DurationDays  int32                  `protobuf:"varint,5,opt,name=duration_days,json=durationDays,proto3" json:"duration_days,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PlanPayload) Reset() {
+	*x = PlanPayload{}
+	mi := &file_subscription_event_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PlanPayload) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PlanPayload) ProtoMessage() {}
+
+func (x *PlanPayload) ProtoReflect() protoreflect.Message {
+	mi := &file_subscription_event_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PlanPayload.ProtoReflect.Descriptor instead.
+func (*PlanPayload) Descriptor() ([]byte, []int) {
+	return file_subscription_event_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *PlanPayload) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *PlanPayload) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *PlanPayload) GetFeatures() []string {
+	if x != nil {
+		return x.Features
+	}
+	return nil
+}
+
+func (x *PlanPayload) GetPrice() float64 {
+	if x != nil {
+		return x.Price
+	}
+	return 0
+}
+
+func (x *PlanPayload) GetDurationDays() int32 {
+	if x != nil {
+		return x.DurationDays
+	}
+	return 0
+}
+
+type SubscriptionPayload struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	UserId        string                 `protobuf:"bytes,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	PlanId        string                 `protobuf:"bytes,3,opt,name=plan_id,json=planId,proto3" json:"plan_id,omitempty"`
+	StartDate     *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=start_date,json=startDate,proto3" json:"start_date,omitempty"`
+	EndDate       *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=end_date,json=endDate,proto3" json:"end_date,omitempty"`
+	Active        bool                   `protobuf:"varint,6,opt,name=active,proto3" json:"active,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SubscriptionPayload) Reset() {
+	*x = SubscriptionPayload{}
+	mi := &file_subscription_event_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SubscriptionPayload) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SubscriptionPayload) ProtoMessage() {}
+
+func (x *SubscriptionPayload) ProtoReflect() protoreflect.Message {
+	mi := &file_subscription_event_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SubscriptionPayload.ProtoReflect.Descriptor instead.
+func (*SubscriptionPayload) Descriptor() ([]byte, []int) {
+	return file_subscription_event_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *SubscriptionPayload) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *SubscriptionPayload) GetUserId() string {
 	if x != nil {
 		return x.UserId
 	}
 	return ""
 }
 
-func (x *SubscriptionEvent) GetPlanId() string {
+func (x *SubscriptionPayload) GetPlanId() string {
 	if x != nil {
 		return x.PlanId
 	}
 	return ""
 }
 
-func (x *SubscriptionEvent) GetStartDate() string {
+func (x *SubscriptionPayload) GetStartDate() *timestamppb.Timestamp {
 	if x != nil {
 		return x.StartDate
 	}
-	return ""
+	return nil
 }
 
-func (x *SubscriptionEvent) GetEndDate() string {
+func (x *SubscriptionPayload) GetEndDate() *timestamppb.Timestamp {
 	if x != nil {
 		return x.EndDate
 	}
-	return ""
+	return nil
 }
 
-func (x *SubscriptionEvent) GetActive() bool {
+func (x *SubscriptionPayload) GetActive() bool {
 	if x != nil {
 		return x.Active
 	}
 	return false
 }
 
-func (x *SubscriptionEvent) GetEventType() SubscriptionEventType {
-	if x != nil {
-		return x.EventType
-	}
-	return SubscriptionEventType_UNKNOWN
-}
-
 var File_subscription_event_proto protoreflect.FileDescriptor
 
 const file_subscription_event_proto_rawDesc = "" +
 	"\n" +
-	"\x18subscription_event.proto\x12\fsubscription\"\x84\x02\n" +
-	"\x11SubscriptionEvent\x12'\n" +
-	"\x0fsubscription_id\x18\x01 \x01(\tR\x0esubscriptionId\x12\x17\n" +
+	"\x18subscription_event.proto\x12\x05event\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x19google/protobuf/any.proto\"u\n" +
+	"\x05Event\x12\x12\n" +
+	"\x04type\x18\x01 \x01(\tR\x04type\x12(\n" +
+	"\x04data\x18\x02 \x01(\v2\x14.google.protobuf.AnyR\x04data\x12.\n" +
+	"\x04time\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\x04time\"\x88\x01\n" +
+	"\vPlanPayload\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1a\n" +
+	"\bfeatures\x18\x03 \x03(\tR\bfeatures\x12\x14\n" +
+	"\x05price\x18\x04 \x01(\x01R\x05price\x12#\n" +
+	"\rduration_days\x18\x05 \x01(\x05R\fdurationDays\"\xe1\x01\n" +
+	"\x13SubscriptionPayload\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\tR\x06userId\x12\x17\n" +
-	"\aplan_id\x18\x03 \x01(\tR\x06planId\x12\x1d\n" +
+	"\aplan_id\x18\x03 \x01(\tR\x06planId\x129\n" +
 	"\n" +
-	"start_date\x18\x04 \x01(\tR\tstartDate\x12\x19\n" +
-	"\bend_date\x18\x05 \x01(\tR\aendDate\x12\x16\n" +
-	"\x06active\x18\x06 \x01(\bR\x06active\x12B\n" +
-	"\n" +
-	"event_type\x18\a \x01(\x0e2#.subscription.SubscriptionEventTypeR\teventType*C\n" +
-	"\x15SubscriptionEventType\x12\v\n" +
-	"\aUNKNOWN\x10\x00\x12\x0e\n" +
-	"\n" +
-	"SUBSCRIBED\x10\x01\x12\r\n" +
-	"\tCANCELLED\x10\x02B$Z\"auth_service/genproto/subscriptionb\x06proto3"
+	"start_date\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\tstartDate\x125\n" +
+	"\bend_date\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\aendDate\x12\x16\n" +
+	"\x06active\x18\x06 \x01(\bR\x06activeB$Z\"auth_service/genproto/subscriptionb\x06proto3"
 
 var (
 	file_subscription_event_proto_rawDescOnce sync.Once
@@ -195,19 +279,24 @@ func file_subscription_event_proto_rawDescGZIP() []byte {
 	return file_subscription_event_proto_rawDescData
 }
 
-var file_subscription_event_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_subscription_event_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+var file_subscription_event_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_subscription_event_proto_goTypes = []any{
-	(SubscriptionEventType)(0), // 0: subscription.SubscriptionEventType
-	(*SubscriptionEvent)(nil),  // 1: subscription.SubscriptionEvent
+	(*Event)(nil),                 // 0: event.Event
+	(*PlanPayload)(nil),           // 1: event.PlanPayload
+	(*SubscriptionPayload)(nil),   // 2: event.SubscriptionPayload
+	(*anypb.Any)(nil),             // 3: google.protobuf.Any
+	(*timestamppb.Timestamp)(nil), // 4: google.protobuf.Timestamp
 }
 var file_subscription_event_proto_depIdxs = []int32{
-	0, // 0: subscription.SubscriptionEvent.event_type:type_name -> subscription.SubscriptionEventType
-	1, // [1:1] is the sub-list for method output_type
-	1, // [1:1] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	3, // 0: event.Event.data:type_name -> google.protobuf.Any
+	4, // 1: event.Event.time:type_name -> google.protobuf.Timestamp
+	4, // 2: event.SubscriptionPayload.start_date:type_name -> google.protobuf.Timestamp
+	4, // 3: event.SubscriptionPayload.end_date:type_name -> google.protobuf.Timestamp
+	4, // [4:4] is the sub-list for method output_type
+	4, // [4:4] is the sub-list for method input_type
+	4, // [4:4] is the sub-list for extension type_name
+	4, // [4:4] is the sub-list for extension extendee
+	0, // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_subscription_event_proto_init() }
@@ -220,14 +309,13 @@ func file_subscription_event_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_subscription_event_proto_rawDesc), len(file_subscription_event_proto_rawDesc)),
-			NumEnums:      1,
-			NumMessages:   1,
+			NumEnums:      0,
+			NumMessages:   3,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
 		GoTypes:           file_subscription_event_proto_goTypes,
 		DependencyIndexes: file_subscription_event_proto_depIdxs,
-		EnumInfos:         file_subscription_event_proto_enumTypes,
 		MessageInfos:      file_subscription_event_proto_msgTypes,
 	}.Build()
 	File_subscription_event_proto = out.File
