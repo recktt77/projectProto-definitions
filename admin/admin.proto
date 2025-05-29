@@ -1,48 +1,42 @@
 syntax = "proto3";
-
 package admin_service;
-
-option go_package = "github.com/recktt77/projectProto-definitions/gen/admin_service";
+option go_package = "github.com/your_account/projectProto-definitions/gen/admin_service";
 
 service AdminService {
   rpc BanUser(BanUserRequest) returns (BanUserResponse);
-  rpc ApproveProject(ModerateProjectRequest) returns (ModerateProjectResponse);
   rpc DeleteReview(DeleteReviewRequest) returns (DeleteReviewResponse);
+  rpc ModerateProject(ModerateProjectRequest) returns (ModerateProjectResponse);
   rpc GetPlatformStats(GetStatsRequest) returns (GetStatsResponse);
 }
 
 message BanUserRequest {
   string user_id = 1;
-  string reason = 2;
+  string reason  = 2;
+}
+message BanUserResponse {
+  bool success = 1;
 }
 
-message BanUserResponse {
+message DeleteReviewRequest {
+  string review_id    = 1;
+  string moderator_id = 2;
+}
+message DeleteReviewResponse {
   bool success = 1;
 }
 
 message ModerateProjectRequest {
   string project_id = 1;
-  string action = 2; // "approve", "reject"
+  string action     = 2; // "approve" или "reject"
 }
-
 message ModerateProjectResponse {
   bool success = 1;
 }
 
-message DeleteReviewRequest {
-  string review_id = 1;
-  string moderator_id = 2;
-}
-
-message DeleteReviewResponse {
-  bool success = 1;
-}
-
 message GetStatsRequest {}
-
 message GetStatsResponse {
-  int32 total_users = 1;
-  int32 banned_users = 2;
+  int32 total_users     = 1;
+  int32 banned_users    = 2;
   int32 active_projects = 3;
-  int32 total_reviews = 4;
+  int32 total_reviews   = 4;
 }

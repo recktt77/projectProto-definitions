@@ -20,8 +20,8 @@ const _ = grpc.SupportPackageIsVersion9
 
 const (
 	AdminService_BanUser_FullMethodName          = "/admin_service.AdminService/BanUser"
-	AdminService_ApproveProject_FullMethodName   = "/admin_service.AdminService/ApproveProject"
 	AdminService_DeleteReview_FullMethodName     = "/admin_service.AdminService/DeleteReview"
+	AdminService_ModerateProject_FullMethodName  = "/admin_service.AdminService/ModerateProject"
 	AdminService_GetPlatformStats_FullMethodName = "/admin_service.AdminService/GetPlatformStats"
 )
 
@@ -30,8 +30,8 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type AdminServiceClient interface {
 	BanUser(ctx context.Context, in *BanUserRequest, opts ...grpc.CallOption) (*BanUserResponse, error)
-	ApproveProject(ctx context.Context, in *ModerateProjectRequest, opts ...grpc.CallOption) (*ModerateProjectResponse, error)
 	DeleteReview(ctx context.Context, in *DeleteReviewRequest, opts ...grpc.CallOption) (*DeleteReviewResponse, error)
+	ModerateProject(ctx context.Context, in *ModerateProjectRequest, opts ...grpc.CallOption) (*ModerateProjectResponse, error)
 	GetPlatformStats(ctx context.Context, in *GetStatsRequest, opts ...grpc.CallOption) (*GetStatsResponse, error)
 }
 
@@ -53,20 +53,20 @@ func (c *adminServiceClient) BanUser(ctx context.Context, in *BanUserRequest, op
 	return out, nil
 }
 
-func (c *adminServiceClient) ApproveProject(ctx context.Context, in *ModerateProjectRequest, opts ...grpc.CallOption) (*ModerateProjectResponse, error) {
+func (c *adminServiceClient) DeleteReview(ctx context.Context, in *DeleteReviewRequest, opts ...grpc.CallOption) (*DeleteReviewResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ModerateProjectResponse)
-	err := c.cc.Invoke(ctx, AdminService_ApproveProject_FullMethodName, in, out, cOpts...)
+	out := new(DeleteReviewResponse)
+	err := c.cc.Invoke(ctx, AdminService_DeleteReview_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *adminServiceClient) DeleteReview(ctx context.Context, in *DeleteReviewRequest, opts ...grpc.CallOption) (*DeleteReviewResponse, error) {
+func (c *adminServiceClient) ModerateProject(ctx context.Context, in *ModerateProjectRequest, opts ...grpc.CallOption) (*ModerateProjectResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(DeleteReviewResponse)
-	err := c.cc.Invoke(ctx, AdminService_DeleteReview_FullMethodName, in, out, cOpts...)
+	out := new(ModerateProjectResponse)
+	err := c.cc.Invoke(ctx, AdminService_ModerateProject_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -88,8 +88,8 @@ func (c *adminServiceClient) GetPlatformStats(ctx context.Context, in *GetStatsR
 // for forward compatibility.
 type AdminServiceServer interface {
 	BanUser(context.Context, *BanUserRequest) (*BanUserResponse, error)
-	ApproveProject(context.Context, *ModerateProjectRequest) (*ModerateProjectResponse, error)
 	DeleteReview(context.Context, *DeleteReviewRequest) (*DeleteReviewResponse, error)
+	ModerateProject(context.Context, *ModerateProjectRequest) (*ModerateProjectResponse, error)
 	GetPlatformStats(context.Context, *GetStatsRequest) (*GetStatsResponse, error)
 	mustEmbedUnimplementedAdminServiceServer()
 }
@@ -104,11 +104,11 @@ type UnimplementedAdminServiceServer struct{}
 func (UnimplementedAdminServiceServer) BanUser(context.Context, *BanUserRequest) (*BanUserResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method BanUser not implemented")
 }
-func (UnimplementedAdminServiceServer) ApproveProject(context.Context, *ModerateProjectRequest) (*ModerateProjectResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ApproveProject not implemented")
-}
 func (UnimplementedAdminServiceServer) DeleteReview(context.Context, *DeleteReviewRequest) (*DeleteReviewResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteReview not implemented")
+}
+func (UnimplementedAdminServiceServer) ModerateProject(context.Context, *ModerateProjectRequest) (*ModerateProjectResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ModerateProject not implemented")
 }
 func (UnimplementedAdminServiceServer) GetPlatformStats(context.Context, *GetStatsRequest) (*GetStatsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPlatformStats not implemented")
@@ -152,24 +152,6 @@ func _AdminService_BanUser_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AdminService_ApproveProject_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ModerateProjectRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AdminServiceServer).ApproveProject(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: AdminService_ApproveProject_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AdminServiceServer).ApproveProject(ctx, req.(*ModerateProjectRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _AdminService_DeleteReview_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteReviewRequest)
 	if err := dec(in); err != nil {
@@ -184,6 +166,24 @@ func _AdminService_DeleteReview_Handler(srv interface{}, ctx context.Context, de
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AdminServiceServer).DeleteReview(ctx, req.(*DeleteReviewRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AdminService_ModerateProject_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ModerateProjectRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminServiceServer).ModerateProject(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AdminService_ModerateProject_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminServiceServer).ModerateProject(ctx, req.(*ModerateProjectRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -218,12 +218,12 @@ var AdminService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _AdminService_BanUser_Handler,
 		},
 		{
-			MethodName: "ApproveProject",
-			Handler:    _AdminService_ApproveProject_Handler,
-		},
-		{
 			MethodName: "DeleteReview",
 			Handler:    _AdminService_DeleteReview_Handler,
+		},
+		{
+			MethodName: "ModerateProject",
+			Handler:    _AdminService_ModerateProject_Handler,
 		},
 		{
 			MethodName: "GetPlatformStats",
