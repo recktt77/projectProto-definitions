@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package messaging;
+
+option go_package = "auth_service/genproto/payment";
+
+service PaymentService {
+    rpc CreatePayment(CreatePaymentRequest) returns (CreatePaymentResponse);
+    rpc GetPayment(GetPaymentRequest) returns (GetPaymentResponse);
+    rpc ListUserPayments(ListUserPaymentsRequest) returns (ListUserPaymentsResponse);
+}
+
+message CreatePaymentRequest {
+    string user_id = 1;
+    string subscription_id = 2;
+}
+
+message CreatePaymentResponse {
+    string payment_id = 1;
+    string status = 2;
+}
+
+message GetPaymentRequest {
+    string payment_id = 1;
+}
+
+message GetPaymentResponse {
+    Payment payment = 1;
+}
+
+message ListUserPaymentsRequest {
+    string user_id = 1;
+}
+
+message ListUserPaymentsResponse {
+    repeated Payment payments = 1;
+}
+
+message Payment {
+    string id = 1;
+    string user_id = 2;
+    string subscription_id = 3;
+    double amount = 4;
+    string status = 5;
+    string created_at = 6;
+    string updated_at = 7;
+}
