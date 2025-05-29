@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+package matching;
+
+option go_package = "github.com/recktt77/projectProto-definitions/matching_service;matching_servicepb";
+
+
+service MatchingService {
+  rpc CreateBid (CreateBidRequest) returns (CreateBidResponse);
+  rpc GetBidsForProject (GetBidsRequest) returns (GetBidsResponse);
+  rpc MatchFreelancers (MatchRequest) returns (MatchResponse);
+}
+
+message CreateBidRequest {
+  string project_id = 1;
+  string freelancer_id = 2;
+  string cover_letter = 3;
+}
+
+message CreateBidResponse {
+  string bid_id = 1;
+}
+
+message GetBidsRequest {
+  string project_id = 1;
+}
+
+message GetBidsResponse {
+  repeated Bid bids = 1;
+}
+
+message MatchRequest {
+  string project_id = 1;
+  repeated string required_skills = 2;
+}
+
+message MatchResponse {
+  repeated Freelancer freelancers = 1;
+}
+
+message Bid {
+  string bid_id = 1;
+  string freelancer_id = 2;
+  string cover_letter = 3;
+  string timestamp = 4;
+}
+
+message Freelancer {
+  string freelancer_id = 1;
+  string name = 2;
+  repeated string skills = 3;
+}
