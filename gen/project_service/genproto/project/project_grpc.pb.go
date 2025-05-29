@@ -19,22 +19,28 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ProjectService_CreateProject_FullMethodName = "/project.ProjectService/CreateProject"
-	ProjectService_UpdateProject_FullMethodName = "/project.ProjectService/UpdateProject"
-	ProjectService_CreateTask_FullMethodName    = "/project.ProjectService/CreateTask"
-	ProjectService_UpdateTask_FullMethodName    = "/project.ProjectService/UpdateTask"
-	ProjectService_AttachFile_FullMethodName    = "/project.ProjectService/AttachFile"
+	ProjectService_GetAllProjects_FullMethodName = "/project.ProjectService/GetAllProjects"
+	ProjectService_GetProject_FullMethodName     = "/project.ProjectService/GetProject"
+	ProjectService_CreateProject_FullMethodName  = "/project.ProjectService/CreateProject"
+	ProjectService_UpdateProject_FullMethodName  = "/project.ProjectService/UpdateProject"
+	ProjectService_CreateTask_FullMethodName     = "/project.ProjectService/CreateTask"
+	ProjectService_UpdateTask_FullMethodName     = "/project.ProjectService/UpdateTask"
+	ProjectService_AttachFile_FullMethodName     = "/project.ProjectService/AttachFile"
+	ProjectService_DeleteProject_FullMethodName  = "/project.ProjectService/DeleteProject"
 )
 
 // ProjectServiceClient is the client API for ProjectService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ProjectServiceClient interface {
+	GetAllProjects(ctx context.Context, in *GetAllProjectsRequest, opts ...grpc.CallOption) (*GetAllProjectsResponse, error)
+	GetProject(ctx context.Context, in *GetProjectRequest, opts ...grpc.CallOption) (*GetProjectResponse, error)
 	CreateProject(ctx context.Context, in *CreateProjectRequest, opts ...grpc.CallOption) (*CreateProjectResponse, error)
 	UpdateProject(ctx context.Context, in *UpdateProjectRequest, opts ...grpc.CallOption) (*UpdateProjectResponse, error)
 	CreateTask(ctx context.Context, in *CreateTaskRequest, opts ...grpc.CallOption) (*CreateTaskResponse, error)
 	UpdateTask(ctx context.Context, in *UpdateTaskRequest, opts ...grpc.CallOption) (*UpdateTaskResponse, error)
 	AttachFile(ctx context.Context, in *AttachFileRequest, opts ...grpc.CallOption) (*AttachFileResponse, error)
+	DeleteProject(ctx context.Context, in *DeleteProjectRequest, opts ...grpc.CallOption) (*DeleteProjectResponse, error)
 }
 
 type projectServiceClient struct {
@@ -43,6 +49,26 @@ type projectServiceClient struct {
 
 func NewProjectServiceClient(cc grpc.ClientConnInterface) ProjectServiceClient {
 	return &projectServiceClient{cc}
+}
+
+func (c *projectServiceClient) GetAllProjects(ctx context.Context, in *GetAllProjectsRequest, opts ...grpc.CallOption) (*GetAllProjectsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetAllProjectsResponse)
+	err := c.cc.Invoke(ctx, ProjectService_GetAllProjects_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *projectServiceClient) GetProject(ctx context.Context, in *GetProjectRequest, opts ...grpc.CallOption) (*GetProjectResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetProjectResponse)
+	err := c.cc.Invoke(ctx, ProjectService_GetProject_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *projectServiceClient) CreateProject(ctx context.Context, in *CreateProjectRequest, opts ...grpc.CallOption) (*CreateProjectResponse, error) {
@@ -95,15 +121,28 @@ func (c *projectServiceClient) AttachFile(ctx context.Context, in *AttachFileReq
 	return out, nil
 }
 
+func (c *projectServiceClient) DeleteProject(ctx context.Context, in *DeleteProjectRequest, opts ...grpc.CallOption) (*DeleteProjectResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteProjectResponse)
+	err := c.cc.Invoke(ctx, ProjectService_DeleteProject_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ProjectServiceServer is the server API for ProjectService service.
 // All implementations must embed UnimplementedProjectServiceServer
 // for forward compatibility.
 type ProjectServiceServer interface {
+	GetAllProjects(context.Context, *GetAllProjectsRequest) (*GetAllProjectsResponse, error)
+	GetProject(context.Context, *GetProjectRequest) (*GetProjectResponse, error)
 	CreateProject(context.Context, *CreateProjectRequest) (*CreateProjectResponse, error)
 	UpdateProject(context.Context, *UpdateProjectRequest) (*UpdateProjectResponse, error)
 	CreateTask(context.Context, *CreateTaskRequest) (*CreateTaskResponse, error)
 	UpdateTask(context.Context, *UpdateTaskRequest) (*UpdateTaskResponse, error)
 	AttachFile(context.Context, *AttachFileRequest) (*AttachFileResponse, error)
+	DeleteProject(context.Context, *DeleteProjectRequest) (*DeleteProjectResponse, error)
 	mustEmbedUnimplementedProjectServiceServer()
 }
 
@@ -114,6 +153,12 @@ type ProjectServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedProjectServiceServer struct{}
 
+func (UnimplementedProjectServiceServer) GetAllProjects(context.Context, *GetAllProjectsRequest) (*GetAllProjectsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAllProjects not implemented")
+}
+func (UnimplementedProjectServiceServer) GetProject(context.Context, *GetProjectRequest) (*GetProjectResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetProject not implemented")
+}
 func (UnimplementedProjectServiceServer) CreateProject(context.Context, *CreateProjectRequest) (*CreateProjectResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateProject not implemented")
 }
@@ -128,6 +173,9 @@ func (UnimplementedProjectServiceServer) UpdateTask(context.Context, *UpdateTask
 }
 func (UnimplementedProjectServiceServer) AttachFile(context.Context, *AttachFileRequest) (*AttachFileResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AttachFile not implemented")
+}
+func (UnimplementedProjectServiceServer) DeleteProject(context.Context, *DeleteProjectRequest) (*DeleteProjectResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteProject not implemented")
 }
 func (UnimplementedProjectServiceServer) mustEmbedUnimplementedProjectServiceServer() {}
 func (UnimplementedProjectServiceServer) testEmbeddedByValue()                        {}
@@ -148,6 +196,42 @@ func RegisterProjectServiceServer(s grpc.ServiceRegistrar, srv ProjectServiceSer
 		t.testEmbeddedByValue()
 	}
 	s.RegisterService(&ProjectService_ServiceDesc, srv)
+}
+
+func _ProjectService_GetAllProjects_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAllProjectsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProjectServiceServer).GetAllProjects(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProjectService_GetAllProjects_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProjectServiceServer).GetAllProjects(ctx, req.(*GetAllProjectsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProjectService_GetProject_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetProjectRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProjectServiceServer).GetProject(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProjectService_GetProject_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProjectServiceServer).GetProject(ctx, req.(*GetProjectRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _ProjectService_CreateProject_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -240,6 +324,24 @@ func _ProjectService_AttachFile_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ProjectService_DeleteProject_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteProjectRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProjectServiceServer).DeleteProject(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProjectService_DeleteProject_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProjectServiceServer).DeleteProject(ctx, req.(*DeleteProjectRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ProjectService_ServiceDesc is the grpc.ServiceDesc for ProjectService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -247,6 +349,14 @@ var ProjectService_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "project.ProjectService",
 	HandlerType: (*ProjectServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "GetAllProjects",
+			Handler:    _ProjectService_GetAllProjects_Handler,
+		},
+		{
+			MethodName: "GetProject",
+			Handler:    _ProjectService_GetProject_Handler,
+		},
 		{
 			MethodName: "CreateProject",
 			Handler:    _ProjectService_CreateProject_Handler,
@@ -266,6 +376,10 @@ var ProjectService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "AttachFile",
 			Handler:    _ProjectService_AttachFile_Handler,
+		},
+		{
+			MethodName: "DeleteProject",
+			Handler:    _ProjectService_DeleteProject_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

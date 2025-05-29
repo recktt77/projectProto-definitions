@@ -10,6 +10,33 @@ message Task {
   string status = 3; // todo, doing, done
 }
 
+message ProjectData {
+  string id = 1;
+  string client_id = 2;
+  string title = 3;
+  string description = 4;
+  string status = 5;
+  repeated Task tasks = 6;
+  repeated string attachments = 7;
+}
+
+
+message GetAllProjectsRequest {
+  string client_id = 1;
+}
+
+message GetAllProjectsResponse {
+  repeated ProjectData projects = 1;
+}
+
+message GetProjectRequest {
+  string id = 1;
+}
+
+message GetProjectResponse {
+  ProjectData project = 1;
+}
+
 message CreateProjectRequest {
   string client_id = 1;
   string title = 2;
@@ -67,10 +94,21 @@ message AttachFileResponse {
   string message = 1;
 }
 
+message DeleteProjectRequest {
+  string id = 1;
+}
+
+message DeleteProjectResponse {
+  string message = 1;
+}
+
 service ProjectService {
+  rpc GetAllProjects(GetAllProjectsRequest) returns (GetAllProjectsResponse);
+  rpc GetProject(GetProjectRequest) returns (GetProjectResponse);
   rpc CreateProject(CreateProjectRequest) returns (CreateProjectResponse);
   rpc UpdateProject(UpdateProjectRequest) returns (UpdateProjectResponse);
   rpc CreateTask(CreateTaskRequest) returns (CreateTaskResponse);
   rpc UpdateTask(UpdateTaskRequest) returns (UpdateTaskResponse);
   rpc AttachFile(AttachFileRequest) returns (AttachFileResponse);
+  rpc DeleteProject(DeleteProjectRequest) returns (DeleteProjectResponse);
 }
